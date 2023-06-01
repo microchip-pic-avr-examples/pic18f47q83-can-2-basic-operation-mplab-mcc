@@ -52,7 +52,7 @@ From there, click "Select MCC Melody" and finish. You will be met with the appli
 ![MCC Configuration Image](images/application_builder.png)
 
 ### Project Configuration
-Before configuring CAN, the microcontroller's clock settings needs changed. Configure the "Clock Control" module to use the internal high frequency oscillatorystal oscillator (HFINTOSC) with a frequency of 32MHz. Normal can operating frequency includes 10, 20, or 40 MHz. 32 Mhz was chosen since it is close to 40 MHz.
+Before configuring CAN, the microcontroller's clock settings needs changed. Configure the "Clock Control" module to use the internal high frequency oscillator (HFINTOSC) with a frequency of 32 MHz. Normal CAN operating frequency includes 10, 20, or 40 MHz. 32 MHz was chosen since it is close to 40 MHz.
 
 ![Clock Control Image](images/clock_control.png)
 
@@ -79,12 +79,12 @@ The fifth and final step is the Filter Object settings. This allows for setup of
 ![CAN Config Image 4](images/can_config4.png)
 
 #### Timer0 (TMR0) Configuration
-After setting up CAN, a 1s timer is needed to periodically transmit CAN frames every 1s. Use the TMR0 module to generate an interrupt every 1s. Add the TMR0 module from Device Resources and configure it as follows. Similar to the CAN FIFO interrupts, we will have to manually code the interrupt behavior later.
+After setting up CAN, a 1s timer is needed to periodically transmit CAN frames. Use the TMR0 module to generate an interrupt every 1s. Add the TMR0 module from Device Resources and configure it as follows. Similar to the CAN FIFO interrupts, we will have to manually code the interrupt behavior later.
 
 ![TMR0 Setup Image](images/tmr0.png)
 
 #### Pin Configuration
-After configuring the modules, use the **Pin Grid View** tab to configure the pins as inputs and outputs. For CAN, any I/O pins on PORTB or PORTD can be either CANTX or CANRX. However, connecting the ATA6563 click to the mikroBUS slot puts the click's TX pin on RC7 and the RX pin on RC6. Since this mapping can't be acheived with the Q83's PPS, we need to run jumpers across the board to connect pins RC6 and RC7 to any pins on PORTB or PORTD. For this example, pin RB0 was set as CANTX, and RB1 as CANRX. Then, RB0 (CANTX) was jumpered to RC6 (RX for the tranceiver) and RB1 (CANRX) was jumpered to RC7 (TX for the tranceiver) as seen in the pictue below. Also, set RA4 as an output to drive the LEDs connected on the HPC board.
+After configuring the modules, use the **Pin Grid View** tab to configure the pins as inputs and outputs. For CAN, any I/O pins on PORTB or PORTD can be either CANTX or CANRX. However, connecting the ATA6563 click to the mikroBUS slot puts the click's TX pin on RC7 and the RX pin on RC6. Since this mapping can't be achieved with the Q83's PPS, we need to run jumpers across the board to connect pins RC6 and RC7 to any pins on PORTB or PORTD. For this example, pin RB0 was set as CANTX, and RB1 as CANRX. Then, RB0 (CANTX) was jumpered to RC6 (RX for the transceiver) and RB1 (CANRX) was jumpered to RC7 (TX for the transceiver) as seen in the picture below. Also, set RA4 as an output to drive the LEDs connected on the HPC board.
 
 ![Pin Module Setup Image](images/pin_grid_view.png)
 
@@ -166,7 +166,7 @@ void CAN1_FIFO2CustomHandler(void);
 void Timer0_CustomHandler(void);
 ```
 
-Finally, add a couple of lines to the main function in `main.c`. First, `SYSTEM_Initialize()` runs the MCC generated code that sets all the neccessary registers and Configuration bits for configuring the clock, pins, CAN, timers, etc. Next, after interrupts are enabled, access the MCC generated functions that assign the function pointers for each of the relevant interrupt callbacks so they can access the custom functions.
+Finally, add a couple of lines to the main function in `main.c`. First, `SYSTEM_Initialize()` runs the MCC generated code that sets all the necessary registers and Configuration bits for configuring the clock, pins, CAN, timers, etc. Next, after interrupts are enabled, access the MCC generated functions that assign the function pointers for each of the relevant interrupt callbacks so they can access the custom functions.
 ```c
 #include "mcc_generated_files/system/system.h"
 #include "can_interrupts.h"
