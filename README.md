@@ -16,20 +16,20 @@ Configuring the PIC18 CAN 2.0 Module found in [TB3266 - Basic Configuration of t
 4. Any bits in the CAN frame specific to FD functionality (BRS,FDF) are not used
 
 ## Software Used
-- [MPLAB X IDE 6.0.5](https://www.microchip.com/en-us/tools-resources/develop/mplab-x-ide?utm_source=GitHub&utm_medium=TextLink&utm_campaign=MCU8_MMTCha_pic18q84&utm_content=pic18f47q84-can-2.0-basic-operation-mplab-mcc&utm_bu=MCU08) or newer 
-- [MPLAB XC8 2.41.0](https://www.microchip.com/en-us/tools-resources/develop/mplab-xc-compilers?utm_source=GitHub&utm_medium=TextLink&utm_campaign=MCU8_MMTCha_pic18q84&utm_content=pic18f47q84-can-2.0-basic-operation-mplab-mcc&utm_bu=MCU08) or newer compiler
-- [MPLAB Code Configurator Melody 5.5.7](https://www.microchip.com/en-us/tools-resources/configure/mplab-code-configurator?utm_source=GitHub&utm_medium=TextLink&utm_campaign=MCU8_MMTCha_pic18q84&utm_content=pic18f47q84-can-2.0-basic-operation-mplab-mcc&utm_bu=MCU08) or newer
+- [MPLAB X IDE 6.10](https://www.microchip.com/en-us/tools-resources/develop/mplab-x-ide?utm_source=GitHub&utm_medium=TextLink&utm_campaign=MCU8_MMTCha_pic18q83&utm_content=pic18f47q83-can-2.0-basic-operation-mplab-mcc&utm_bu=MCU08) or newer 
+- [MPLAB XC8 2.41.0](https://www.microchip.com/en-us/tools-resources/develop/mplab-xc-compilers?utm_source=GitHub&utm_medium=TextLink&utm_campaign=MCU8_MMTCha_pic18q83&utm_content=pic18f47q83-can-2.0-basic-operation-mplab-mcc&utm_bu=MCU08) or newer compiler
+- [MPLAB Code Configurator Melody 5.5.7](https://www.microchip.com/en-us/tools-resources/configure/mplab-code-configurator?utm_source=GitHub&utm_medium=TextLink&utm_campaign=MCU8_MMTCha_pic18q83&utm_content=pic18f47q84-can-2.0-basic-operation-mplab-mcc&utm_bu=MCU08) or newer
 
 ## Hardware Used
 
-  - [PIC18F47Q83 DIP](https://www.microchip.com/en-us/product/PIC18F57Q83?utm_source=GitHub&utm_medium=TextLink&utm_campaign=MCU8_MMTCha_pic18q84&utm_content=pic18f47q84-can-2.0-basic-operation-mplab-mcc&utm_bu=MCU08)
-  - [Curiosity High Pin Count (HPC) Development Board](https://www.microchip.com/en-us/development-tool/DM164136?utm_source=GitHub&utm_medium=TextLink&utm_campaign=MCU8_MMTCha_pic18q84&utm_content=pic18f47q84-can-2.0-basic-operation-mplab-mcc&utm_bu=MCU08)
+  - [PIC18F47Q83 DIP](https://www.microchip.com/en-us/product/PIC18F57Q83?utm_source=GitHub&utm_medium=TextLink&utm_campaign=MCU8_MMTCha_pic18q83&utm_content=pic18f47q83-can-2.0-basic-operation-mplab-mcc&utm_bu=MCU08)
+  - [Curiosity High Pin Count (HPC) Development Board](https://www.microchip.com/en-us/development-tool/DM164136?utm_source=GitHub&utm_medium=TextLink&utm_campaign=MCU8_MMTCha_pic18q83&utm_content=pic18f47q83-can-2.0-basic-operation-mplab-mcc&utm_bu=MCU08)
   - [ATA6563 Click board](https://www.mikroe.com/ata6563-click)
-  - [K2L OptoLyzer® MOCCA FD](https://www.microchip.com/en-us/tools-resources/develop/k2l-automotive-tools?utm_source=GitHub&utm_medium=TextLink&utm_campaign=MCU8_MMTCha_pic18q84&utm_content=pic18f47q84-can-2.0-basic-operation-mplab-mcc&utm_bu=MCU08)
+  - [K2L OptoLyzer® MOCCA FD](https://www.microchip.com/en-us/tools-resources/develop/k2l-automotive-tools?utm_source=GitHub&utm_medium=TextLink&utm_campaign=MCU8_MMTCha_pic18q83&utm_content=pic18f47q83-can-2.0-basic-operation-mplab-mcc&utm_bu=MCU08)
 
 ## Setup
 
-The hardware consists of a [PIC18F47Q83 DIP](https://www.microchip.com/en-us/product/PIC18F57Q83?utm_source=GitHub&utm_medium=TextLink&utm_campaign=MCU8_MMTCha_pic18q84&utm_content=pic18f47q84-can-2.0-basic-operation-mplab-mcc&utm_bu=MCU08) in a [Curiosity HPC Development Board](https://www.microchip.com/en-us/development-tool/DM164136?utm_source=GitHub&utm_medium=TextLink&utm_campaign=MCU8_MMTCha_pic18q84&utm_content=pic18f47q84-can-2.0-basic-operation-mplab-mcc&utm_bu=MCU08), which breaks out the microcontroller's pins as well as serves as the programmer/debugger. It also serves as a backplane for connecting the Q83's CAN TX/RX pins to the ATA6563. From there, the ATA6563 converts the incoming TX/RX into the differential pair required for CAN communication. In the setup picture below, the jumper wires are used to bridge the TX/RX pins on the Q83 to pins that can be access by the ATA6563 on it's mikroBUS connector.
+The hardware consists of a [PIC18F47Q83 DIP](https://www.microchip.com/en-us/product/PIC18F57Q83?utm_source=GitHub&utm_medium=TextLink&utm_campaign=MCU8_MMTCha_pic18q83&utm_content=pic18f47q83-can-2.0-basic-operation-mplab-mcc&utm_bu=MCU08) in a [Curiosity HPC Development Board](https://www.microchip.com/en-us/development-tool/DM164136?utm_source=GitHub&utm_medium=TextLink&utm_campaign=MCU8_MMTCha_pic18q83&utm_content=pic18f47q83-can-2.0-basic-operation-mplab-mcc&utm_bu=MCU08), which breaks out the microcontroller's pins as well as serves as the programmer/debugger. It also serves as a backplane for connecting the Q83's CAN TX/RX pins to the ATA6563. From there, the ATA6563 converts the incoming TX/RX into the differential pair required for CAN communication. In the setup picture below, the jumper wires are used to bridge the TX/RX pins on the Q83 to pins that can be access by the ATA6563 on it's mikroBUS connector.
 
 For this setup, the K2L MOCCA FD was used as a CAN bus analyzer to both view the outgoing CAN frames and to send the incoming ones to the device.
 
