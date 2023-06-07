@@ -2,7 +2,7 @@
 
 # CAN 2.0 Setup For the PIC18-Q83 Family of Microcontrollers
 
-This project showcases the setup and use of the new CAN 2.0 module on the PIC18-Q83 family of devices using MPLAB® Code Configurator (MCC) Melody. This software speeds up the configuration time and hassle for settings such as baud rate, receive masks/filters and handling receive/transmit FIFO buffers.
+This project showcases the setup and use of the new Controller Area Network (CAN) 2.0 module on the PIC18-Q83 family of devices using MPLAB® Code Configurator (MCC) Melody. This software speeds up the configuration time and hassle for settings such as baud rate, receive masks/filters and handling receive/transmit FIFO buffers.
 
 This example's functionality includes periodically transmitting CAN frames on 1s intervals, echoing incoming messages with a specific message ID (0x111), and setting LEDs based on data with a different specific message ID (0x585).  
 
