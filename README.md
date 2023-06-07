@@ -2,7 +2,7 @@
 
 # CAN 2.0 Setup For the PIC18-Q83 Family of Microcontrollers
 
-This project showcases the setup and use of the new CAN 2.0 (Controller Area Network) module on the PIC18-Q83 family of devices using MPLAB® Code Configurator (MCC) Melody. This software speeds up the configuration time and hassle for settings such as baud rate, receive masks/filters and handling receive/transmit FIFO buffers.
+This project showcases the setup and use of the new CAN 2.0 module on the PIC18-Q83 family of devices using MPLAB® Code Configurator (MCC) Melody. This software speeds up the configuration time and hassle for settings such as baud rate, receive masks/filters and handling receive/transmit FIFO buffers.
 
 This example's functionality includes periodically transmitting CAN frames on 1s intervals, echoing incoming messages with a specific message ID (0x111), and setting LEDs based on data with a different specific message ID (0x585).  
 
@@ -10,9 +10,9 @@ This example's functionality includes periodically transmitting CAN frames on 1s
 
 Configuring the PIC18 CAN 2.0 Module found in [TB3266 - Basic Configuration of the PIC18 CAN FD Module](https://ww1.microchip.com/downloads/aemDocuments/documents/MCU08/ProductDocuments/ProductBrief/90003266A.pdf) with a few exceptions specific to CAN 2.0.
 
-1. Only CAN 2.0 normal mode is used (REQOP=0b110)
-2. CAN 2.0 only uses the Nominal Bit Rate setup steps for the timing on the entire CAN Frame
-3. CAN 2.0 can only have DLC of 8 bytes or fewer
+1. Only CAN 2.0 Normal mode is used (REQOP=0b110)
+2. CAN 2.0 only uses the nominal bit rate setup steps for the timing on the entire CAN Frame
+3. CAN 2.0 has a data length code (DLC) of 8 bytes or fewer
 4. Any bits in the CAN frame specific to FD functionality (BRS,FDF) are not used
 
 ## Software Used
@@ -29,7 +29,7 @@ Configuring the PIC18 CAN 2.0 Module found in [TB3266 - Basic Configuration of t
 
 ## Setup
 
-The hardware consists of a [PIC18F47Q83 DIP](https://www.microchip.com/en-us/product/PIC18F57Q83?utm_source=GitHub&utm_medium=TextLink&utm_campaign=MCU8_MMTCha_pic18q83&utm_content=pic18f47q83-can-2.0-basic-operation-mplab-mcc&utm_bu=MCU08) in a [Curiosity HPC Development Board](https://www.microchip.com/en-us/development-tool/DM164136?utm_source=GitHub&utm_medium=TextLink&utm_campaign=MCU8_MMTCha_pic18q83&utm_content=pic18f47q83-can-2.0-basic-operation-mplab-mcc&utm_bu=MCU08), which breaks out the microcontroller's pins as well as serves as the programmer/debugger. It also serves as a backplane for connecting the Q83's CAN TX/RX pins to the ATA6563. From there, the ATA6563 converts the incoming TX/RX into the differential pair required for CAN communication. In the setup picture below, the jumper wires are used to bridge the TX/RX pins on the Q83 to pins that can be access by the ATA6563 on it's mikroBUS connector.
+The hardware consists of a [PIC18F47Q83 DIP](https://www.microchip.com/en-us/product/PIC18F57Q83?utm_source=GitHub&utm_medium=TextLink&utm_campaign=MCU8_MMTCha_pic18q83&utm_content=pic18f47q83-can-2.0-basic-operation-mplab-mcc&utm_bu=MCU08) in a [Curiosity HPC Development Board](https://www.microchip.com/en-us/development-tool/DM164136?utm_source=GitHub&utm_medium=TextLink&utm_campaign=MCU8_MMTCha_pic18q83&utm_content=pic18f47q83-can-2.0-basic-operation-mplab-mcc&utm_bu=MCU08), which breaks out the microcontroller's pins as well as serves as the programmer/debugger. It also serves as a backplane for connecting the Q83's CAN TX/RX pins to the ATA6563. From there, the ATA6563 converts the incoming TX/RX into the differential pair required for CAN communication. In the setup picture below, the jumper wires are used to bridge the TX/RX pins on the Q83 to pins that can be accessed by the ATA6563 on it's mikroBUS connector.
 
 For this setup, the K2L MOCCA FD was used as a CAN bus analyzer to both view the outgoing CAN frames and to send the incoming ones to the device.
 
@@ -52,7 +52,7 @@ From there, click "Select MCC Melody" and finish. You will be met with the appli
 ![MCC Configuration Image](images/application_builder.png)
 
 ### Project Configuration
-Before configuring CAN, the microcontroller's clock settings needs changed. Configure the "Clock Control" module to use the internal high frequency oscillator (HFINTOSC) with a frequency of 32 MHz. Normal CAN operating frequency includes 10, 20, or 40 MHz. 32 MHz was chosen since it is close to 40 MHz.
+Before configuring CAN, the microcontroller's clock settings need to be changed. Configure the Clock Control module to use the internal high frequency oscillator (HFINTOSC) with a frequency of 32 MHz. Normal CAN operating frequency includes 10, 20, or 40 MHz. 32 MHz was chosen since it is close to 40 MHz.
 
 ![Clock Control Image](images/clock_control.png)
 
@@ -73,7 +73,7 @@ The fourth step is the FIFO settings. Here is where the transmit and receive FIF
 
 ![CAN Config Image 2](images/can_config2.png)
 
-The fifth and final step is the Filter Object settings. This allows for setup of masks and filters, which determine which message IDs are accepted. Each filter object can be associated with a specific receive FIFO and any number of message IDs can be entered, which will automatically set up the masks/filters to accept those IDs. FIFO1 will respond to messages with an ID of 0x111 and FIFO2 will respond to messages with an ID of 0x585. We will setup their responses later in code.
+The fifth and final step is the Filter Object settings. This allows for setup of masks and filters, that determine which message IDs are accepted. Each filter object can be associated with a specific receive FIFO and any number of message IDs can be entered, which will automatically set up the masks/filters to accept those IDs. FIFO1 will respond to messages with an ID of 0x111 and FIFO2 will respond to messages with an ID of 0x585. We will setup their responses later in code.
 
 ![CAN Config Image 3](images/can_config3.png)
 ![CAN Config Image 4](images/can_config4.png)
@@ -84,7 +84,7 @@ After setting up CAN, a 1s timer is needed to periodically transmit CAN frames. 
 ![TMR0 Setup Image](images/tmr0.png)
 
 #### Pin Configuration
-After configuring the modules, use the **Pin Grid View** tab to configure the pins as inputs and outputs. For CAN, any I/O pins on PORTB or PORTD can be either CANTX or CANRX. However, connecting the ATA6563 click to the mikroBUS slot puts the click's TX pin on RC7 and the RX pin on RC6. Since this mapping can't be achieved with the Q83's PPS, we need to run jumpers across the board to connect pins RC6 and RC7 to any pins on PORTB or PORTD. For this example, pin RB0 was set as CANTX, and RB1 as CANRX. Then, RB0 (CANTX) was jumpered to RC6 (RX for the transceiver) and RB1 (CANRX) was jumpered to RC7 (TX for the transceiver) as seen in the picture below. Also, set RA4 as an output to drive the LEDs connected on the HPC board.
+After configuring the modules, use the **Pin Grid View** tab to configure the pins as inputs and outputs. For CAN, any I/O pins on PORTB or PORTD can be either CANTX or CANRX. However, connecting the ATA6563 Click™ to the mikroBUS™ slot puts the click's TX pin on RC7 and the RX pin on RC6. Since this mapping can't be achieved with the Q83's PPS, we need to run jumpers across the board to connect pins RC6 and RC7 to any pins on PORTB or PORTD. For this example, pin RB0 was set as CANTX, and RB1 as CANRX. Then, RB0 (CANTX) was jumpered to RC6 (RX for the transceiver) and RB1 (CANRX) was jumpered to RC7 (TX for the transceiver) as seen in the picture below. Also, set RA4 as an output to drive the LEDs connected on the HPC board.
 
 ![Pin Module Setup Image](images/pin_grid_view.png)
 
